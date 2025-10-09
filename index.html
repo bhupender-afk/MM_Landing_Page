@@ -1,0 +1,3456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zuvomo | Professional Market Making Services</title>
+    <link rel="icon" type="image/png" href="assets/Favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --primary-blue: #3B82F6;
+            --light-blue: #60A5FA;
+            --extra-light-blue: #DBEAFE;
+            --ultra-light-blue: #EFF6FF;
+            --dark-blue: #1E40AF;
+            --navy-blue: #1E3A8A;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --success-green: #10B981;
+            --warning-red: #EF4444;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            --primary-gradient: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+            --light-gradient: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            --hero-gradient: linear-gradient(135deg, #FFFFFF 0%, #EFF6FF 50%, #DBEAFE 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #2F3A63;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        /* Professional Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loading-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Smooth Scrolling Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Navigation with Professional Logo */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(47, 58, 99, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(47, 58, 99, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        /* Professional Logo Design */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--light-blue);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 12px 28px;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-blue);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--hero-gradient);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 3;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: fadeInLeft 1s ease 0.3s forwards;
+            max-width: 600px;
+            position: relative;
+            z-index: 4;
+            text-align: left;
+        }
+
+        .hero-visual {
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 1s ease 0.6s forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        .spline-container {
+            height: 500px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--gray-200);
+            background: var(--white);
+            position: relative;
+        }
+
+        /* Hide Spline watermark */
+        .spline-container iframe {
+            position: relative;
+        }
+
+        .spline-container::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 180px;
+            height: 60px;
+            background: var(--white);
+            z-index: 10;
+            border-radius: 24px 0 24px 0;
+        }
+
+        .hero-visual {
+            opacity: 0;
+            transform: translateX(30px);
+            animation: fadeInRight 1s ease 0.6s forwards;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 8px 16px;
+            background: var(--ultra-light-blue);
+            border: 1px solid var(--extra-light-blue);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: white;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: var(--white);
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid var(--primary-blue);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Professional Trust Indicators */
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .trust-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        /* Interactive Trading Dashboard Visual */
+        .trading-dashboard {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-2xl);
+            padding: 2rem;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 6px 12px;
+            background: var(--success-green);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        /* Professional Chart Visualization */
+        .chart-container {
+            height: 200px;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            border-radius: 16px;
+            position: relative;
+            margin-bottom: 2rem;
+            padding: 1rem;
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 120px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Cpath d='M0,80 Q100,20 200,40 T400,20' stroke='%233B82F6' stroke-width='3' fill='none'/%3E%3Cpath d='M0,80 Q100,20 200,40 T400,20 L400,120 L0,120 Z' fill='url(%23gradient)'/%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%233B82F6' stop-opacity='0.3'/%3E%3Cstop offset='100%25' stop-color='%233B82F6' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E") center/cover no-repeat;
+        }
+
+        /* Real-time Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: var(--gray-50);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .metric-change {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .positive {
+            color: var(--success-green);
+        }
+
+        .negative {
+            color: var(--warning-red);
+        }
+
+        /* Professional Exchange Logos with SVG */
+        .partners-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partners-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .partners-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .partners-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .partners-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Professional SVG Exchange Logos */
+        .exchanges-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .exchange-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .exchange-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-gradient);
+            transition: left 0.5s ease;
+        }
+
+        .exchange-card:hover::before {
+            left: 0;
+        }
+
+        .exchange-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* Professional SVG Logo Styling */
+        .exchange-logo-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exchange-card:hover .exchange-logo-container {
+            transform: scale(1.1);
+        }
+
+        .exchange-logo-svg {
+            width: 60px;
+            height: 60px;
+            transition: all 0.3s ease;
+        }
+
+        /* Real Exchange Brand Colors & SVGs */
+        .binance-logo {
+            background: linear-gradient(135deg, #F3BA2F, #FCD34D);
+        }
+
+        .coinbase-logo {
+            background: linear-gradient(135deg, #0052FF, #1E3A8A);
+        }
+
+        .okx-logo {
+            background: linear-gradient(135deg, #000000, #374151);
+        }
+
+        .kraken-logo {
+            background: linear-gradient(135deg, #5741D9, #7C3AED);
+        }
+
+        .huobi-logo {
+            background: linear-gradient(135deg, #2EADF4, #60A5FA);
+        }
+
+        .gate-logo {
+            background: linear-gradient(135deg, #00D4AA, #10B981);
+        }
+
+        .exchange-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .exchange-volume {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .exchange-tier {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tier-1 {
+            background: linear-gradient(135deg, #FEF3C7, #FCD34D);
+            color: #92400E;
+        }
+
+        .tier-2 {
+            background: linear-gradient(135deg, #E5E7EB, #D1D5DB);
+            color: #374151;
+        }
+
+        /* Interactive Before/After Section - Enhanced */
+        .comparison-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--ultra-light-blue);
+            color: var(--primary-blue);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        /* Exchange Icon Hover Effects */
+        .exchange-icon:hover {
+            transform: scale(1.1) !important;
+            background: rgba(255,255,255,0.25) !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1) !important;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: white;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Enhanced Liquidity Slider */
+        .liquidity-slider {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+            border-radius: 32px;
+            overflow: hidden;
+            margin-top: 4rem;
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .slider-content {
+            display: flex;
+            width: 200%;
+            height: 100%;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-panel {
+            width: 50%;
+            height: 100%;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .before-panel {
+            background: linear-gradient(135deg, #FEF2F2 0%, #FECACA 20%, #FCA5A5 100%);
+            border-right: 2px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .after-panel {
+            background: linear-gradient(135deg, #ECFDF5 0%, #BBF7D0 20%, #86EFAC 100%);
+        }
+
+        /* Enhanced Order Book Visualization */
+        .orderbook-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 450px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .book-container {
+            display: flex;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+            max-width: 700px;
+            padding: 2rem;
+        }
+
+        .bid-side, .ask-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .book-title {
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .bid-title {
+            background: linear-gradient(135deg, #10B981, #059669);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .ask-title {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .order-bar {
+            height: 40px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bid-bar {
+            background: linear-gradient(135deg, #10B981, #059669);
+            margin-right: 30px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .ask-bar {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            margin-left: 30px;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Enhanced Slider Controls */
+        .slider-controls {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .control-btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn.before-btn {
+            background: linear-gradient(135deg, #EF4444, #DC2626);
+            color: white;
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+        }
+
+        .control-btn.after-btn {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .control-btn.active {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Services Section - Enhanced */
+        .services-section {
+            padding: 4rem 2rem 8rem 2rem;
+            background: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.15);
+            border-color: var(--light-blue);
+            background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--light-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .service-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.95rem;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--success-green);
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            background: #D1FAE5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        /* Enhanced Testimonials */
+        .testimonials-section {
+            padding: 8rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonial-quote {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-blue);
+            position: absolute;
+            top: -1rem;
+            left: -1rem;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+
+        .author-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .author-info p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Enhanced CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-description {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-white {
+            padding: 18px 36px;
+            background: white;
+            color: var(--primary-blue);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            padding: 18px 36px;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--light-blue);
+            font-size: 1.1rem;
+        }
+
+        .footer-section a {
+            color: var(--gray-400);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--gray-700);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-400);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-800);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+                padding: 0 1rem;
+            }
+            
+            .hero-content {
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .liquidity-slider {
+                height: 600px;
+            }
+
+            .slider-panel {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .exchanges-showcase {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Exchange Carousel Animation */
+        @keyframes scrollExchanges {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .exchanges-carousel {
+            mask: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+            -webkit-mask: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        .exchange-item:hover {
+            transform: translateY(-10px) scale(1.1);
+            background: rgba(255,255,255,0.25);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        /* News Carousel Section */
+        .news-section {
+            padding: 4rem 0;
+            background: #2F3A63;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin-top: 2rem;
+            mask: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            -webkit-mask: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+        }
+
+        .news-track {
+            display: flex;
+            animation: scrollNews 20s linear infinite;
+            gap: 2rem;
+        }
+
+        @keyframes scrollNews {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .news-item {
+            flex: 0 0 auto;
+            width: 140px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        .news-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .news-item img {
+            max-width: 120px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+        .news-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .news-title h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* Responsive design for news carousel */
+        @media (max-width: 768px) {
+            .news-section {
+                padding: 3rem 0;
+            }
+
+            .news-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .news-item {
+                width: 120px;
+                height: 60px;
+            }
+
+            .news-track {
+                gap: 1.5rem;
+                animation: scrollNews 15s linear infinite;
+            }
+        }
+
+        /* Comparison Table Section */
+        .comparison-table-section {
+            padding: 3rem 0;
+            background: #2F3A63;
+            position: relative;
+        }
+
+        .comparison-table-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .comparison-table-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .comparison-table-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            border-radius: 2px;
+        }
+
+        .comparison-table-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .comparison-table-title p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        .professional-table {
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin: 0 auto;
+        }
+
+        .professional-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        .professional-table thead {
+            background: linear-gradient(135deg, #2F3A63 0%, #3B4A7A 100%);
+        }
+
+        .professional-table th {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            position: relative;
+        }
+
+        .professional-table th:first-child {
+            text-align: left;
+            width: 35%;
+            vertical-align: top;
+        }
+
+        .professional-table th:nth-child(2) {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .professional-table th:nth-child(2)::after {
+            content: '👑';
+            position: absolute;
+            top: -8px;
+            right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .professional-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #f0f0f0;
+            height: auto;
+            min-height: 60px;
+        }
+
+        .professional-table tbody tr:hover {
+            background: #f8fafc;
+            transform: scale(1.01);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .professional-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .professional-table tbody tr:nth-child(even):hover {
+            background: #f1f5f9;
+        }
+
+        .professional-table td {
+            padding: 1.25rem 1.5rem;
+            vertical-align: top;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            height: auto;
+            min-height: 60px;
+        }
+
+        .professional-table td:first-child {
+            font-weight: 700;
+            color: #1f2937;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-right: 4px solid #10B981;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .advantage-cell {
+            text-align: center;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            position: relative;
+            border-left: 4px solid #10B981;
+            font-weight: 600;
+            box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.1);
+            vertical-align: top;
+        }
+
+        .disadvantage-cell {
+            text-align: center;
+            background: #fef2f2;
+            position: relative;
+            vertical-align: top;
+        }
+
+        .check-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 12px;
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+            animation: pulse-check 2s infinite;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .cross-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 8px;
+            opacity: 0.8;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+        }
+
+        .advantage-text {
+            color: #047857;
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            text-align: center;
+        }
+
+        .disadvantage-text {
+            color: #991B1B;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.85;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Pulse Animation for Check Icons */
+        @keyframes pulse-check {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Enhanced Visual Hierarchy for ZUVOMO Column */
+        .professional-table tbody tr:hover .advantage-cell {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            transform: translateX(2px);
+            transition: all 0.3s ease;
+        }
+
+        .professional-table tbody tr:hover .disadvantage-cell {
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        /* Enhanced Accessibility Features */
+        .professional-table th:focus,
+        .professional-table td:focus {
+            outline: 3px solid #10B981;
+            outline-offset: 2px;
+        }
+
+        .professional-table {
+            scroll-behavior: smooth;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            .professional-table {
+                border: 2px solid;
+            }
+
+            .check-icon, .cross-icon {
+                border: 2px solid;
+            }
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .comparison-table-section {
+                padding: 3rem 0;
+            }
+
+            .comparison-table-title h2 {
+                font-size: 2rem;
+            }
+
+            .professional-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+                scrollbar-color: #10B981 #f1f5f9;
+            }
+
+            .professional-table::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .professional-table::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 4px;
+            }
+
+            .professional-table::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+                border-radius: 4px;
+            }
+
+            .professional-table table {
+                min-width: 700px;
+            }
+
+            .professional-table th,
+            .professional-table td {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .check-icon,
+            .cross-icon {
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+            }
+        }
+
+        /* Tablet Responsive Design */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .professional-table th,
+            .professional-table td {
+                padding: 1.1rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Professional Loading Animation */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero-content,
+            .hero-visual {
+                animation-play-state: running;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-content,
+            .hero-visual {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 480px) {
+            /* Improved touch targets - minimum 44px */
+            .nav-menu a {
+                padding: 12px 16px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            button, .btn-primary, .btn-secondary, .emergency-btn, .premium-btn {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+
+            /* Hero section mobile optimization */
+            .hero-title {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            /* Contact Us button mobile optimization */
+            .hero-cta {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            /* Logo carousel mobile */
+            .exchanges-carousel {
+                margin-bottom: 2rem;
+            }
+
+            /* Improve spacing for mobile */
+            .partners-section, .comparison-section {
+                padding: 3rem 1rem;
+            }
+
+            /* Trust metrics mobile layout */
+            .trust-elements {
+                position: static;
+                margin: 2rem 0;
+                text-align: center;
+            }
+
+            /* Typography mobile adjustments */
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+
+            /* Container padding mobile */
+            .hero-container, .partners-container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Tablet touch improvements */
+        @media (max-width: 768px) and (min-width: 481px) {
+            button, .btn-primary, .btn-secondary {
+                min-height: 48px;
+                padding: 14px 28px;
+            }
+
+            .nav-menu a {
+                padding: 14px 20px;
+                min-height: 48px;
+            }
+        }
+
+        /* Enhanced Visual Hierarchy and Spacing System */
+        /* 8px Grid System Implementation */
+
+        /* Consistent Section Spacing */
+        section {
+            margin-bottom: 120px; /* 15 x 8px */
+        }
+
+        /* Content Container Improvements */
+        .hero-container, .partners-container, .services-container, .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px; /* 6 x 8px */
+        }
+
+        /* Typography Hierarchy Improvements */
+        .section-title {
+            margin-bottom: 48px; /* 6 x 8px */
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            margin-bottom: 64px; /* 8 x 8px */
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Card and Component Spacing */
+        .service-card, .exchange-card, .testimonial-card {
+            margin-bottom: 32px; /* 4 x 8px */
+            padding: 32px; /* 4 x 8px */
+        }
+
+        /* Button Group Spacing */
+        .hero-cta {
+            gap: 24px; /* 3 x 8px */
+            margin-top: 48px; /* 6 x 8px */
+        }
+
+        /* List Item Spacing */
+        .service-features li, .feature-list li {
+            margin-bottom: 16px; /* 2 x 8px */
+            padding: 8px 0; /* 1 x 8px */
+        }
+
+        /* Logo Grid Improvements */
+        .exchanges-carousel, .logo-carousel {
+            margin: 64px 0; /* 8 x 8px */
+        }
+
+        /* Trust Metrics Spacing */
+        .trust-elements .trust-item {
+            margin-bottom: 24px; /* 3 x 8px */
+        }
+
+        /* Improved Content Grouping */
+        .content-group {
+            margin-bottom: 80px; /* 10 x 8px */
+        }
+
+        .content-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Enhanced Border Radius System */
+        .card, .service-card, .exchange-card {
+            border-radius: 16px; /* 2 x 8px */
+        }
+
+        button, .btn-primary, .btn-secondary {
+            border-radius: 12px; /* 1.5 x 8px */
+        }
+
+        .logo-container, .partner-logo {
+            border-radius: 16px; /* 2 x 8px */
+        }
+
+        /* Visual Flow Improvements */
+        .comparison-section {
+            padding: 96px 48px; /* 12 x 8px, 6 x 8px */
+        }
+
+        .partners-section {
+            padding: 96px 48px; /* 12 x 8px, 6 x 8px */
+        }
+
+        /* Improved Z-index Hierarchy */
+        .navbar {
+            z-index: 1000;
+        }
+
+        .loading-screen {
+            z-index: 9999;
+        }
+
+        .modal, .overlay {
+            z-index: 2000;
+        }
+
+        .floating-elements {
+            z-index: 10;
+        }
+
+        /* Content Width Optimization */
+        .text-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .narrow-content {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Performance Optimizations */
+        /* Reduce motion for performance and accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Optimize heavy animations for better performance */
+        .performance-optimized {
+            will-change: transform;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        /* Reduce intensive animations to 30fps instead of 60fps */
+        @keyframes optimized-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); } /* Reduced scale for better performance */
+        }
+
+        @keyframes optimized-glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Replace heavy transforms with lighter alternatives */
+        .shake-reduced {
+            animation: optimized-pulse 2s ease-in-out infinite; /* Replace shake with pulse */
+        }
+
+        .sparkle-reduced {
+            animation: optimized-glow 3s ease-in-out infinite; /* Replace sparkle with glow */
+        }
+
+        /* Lazy loading for images */
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+
+        /* Optimize carousel animations */
+        .optimized-carousel {
+            animation-duration: 40s; /* Slower animation for less CPU usage */
+        }
+
+        /* Reduce animation frequency */
+        .reduced-frequency {
+            animation-duration: 4s; /* Slower than original for performance */
+        }
+
+        /* Intersection Observer optimizations */
+        .lazy-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .lazy-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced Accessibility Features */
+        /* Focus indicators for keyboard navigation */
+        *:focus {
+            outline: 2px solid #3B82F6;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Skip link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #3B82F6;
+            color: white;
+            padding: 8px;
+            z-index: 10000;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Improved button focus states */
+        button:focus, .btn-primary:focus, .btn-secondary:focus {
+            outline: 3px solid #60A5FA;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Navigation focus improvements */
+        .nav-menu a:focus {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            * {
+                border-color: currentColor;
+            }
+
+            .logo, .brand-logo {
+                filter: contrast(2);
+            }
+        }
+
+        /* Reduced motion accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-reveal, .fade-in, .slide-in {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Keyboard navigation indicators */
+        .keyboard-focusable {
+            position: relative;
+        }
+
+        .keyboard-focusable:focus::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid #3B82F6;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* Logo Display Fixes */
+        .logo-container img {
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            min-height: 40px;
+            min-width: 40px;
+        }
+
+        .logo-container img:not([src]),
+        .logo-container img[src=""] {
+            display: none;
+        }
+
+        /* Ensure logos are visible on dark backgrounds */
+        .trusted-projects-section img {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .trusted-projects-section img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .slider-content.show-after {
+            transform: translateX(-50%);
+        }
+
+        /* Enhanced Order Bar Animations */
+        .before-panel .bid-bar:nth-child(1) { width: 30%; }
+        .before-panel .bid-bar:nth-child(2) { width: 25%; }
+        .before-panel .bid-bar:nth-child(3) { width: 20%; }
+        .before-panel .bid-bar:nth-child(4) { width: 15%; }
+        .before-panel .bid-bar:nth-child(5) { width: 10%; }
+
+        .before-panel .ask-bar:nth-child(1) { width: 28%; }
+        .before-panel .ask-bar:nth-child(2) { width: 23%; }
+        .before-panel .ask-bar:nth-child(3) { width: 18%; }
+        .before-panel .ask-bar:nth-child(4) { width: 13%; }
+        .before-panel .ask-bar:nth-child(5) { width: 8%; }
+
+        .after-panel .bid-bar:nth-child(1) { width: 90%; }
+        .after-panel .bid-bar:nth-child(2) { width: 85%; }
+        .after-panel .bid-bar:nth-child(3) { width: 80%; }
+        .after-panel .bid-bar:nth-child(4) { width: 75%; }
+        .after-panel .bid-bar:nth-child(5) { width: 70%; }
+
+        .after-panel .ask-bar:nth-child(1) { width: 88%; }
+        .after-panel .ask-bar:nth-child(2) { width: 83%; }
+        .after-panel .ask-bar:nth-child(3) { width: 78%; }
+        .after-panel .ask-bar:nth-child(4) { width: 73%; }
+        .after-panel .ask-bar:nth-child(5) { width: 68%; }\n\n        /* Enhanced Hero Section Styles */\n        .brand-name {\n            background: linear-gradient(135deg, #10B981 0%, #34D399 50%, #FFD700 100%);\n            -webkit-background-clip: text;\n            -webkit-text-fill-color: transparent;\n            background-clip: text;\n            font-size: 4rem;\n            font-weight: 900;\n            letter-spacing: 3px;\n            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);\n            animation: glow-pulse 3s ease-in-out infinite;\n        }\n\n        .tagline {\n            font-size: 1.8rem;\n            font-weight: 600;\n            color: rgba(255, 255, 255, 0.9);\n            letter-spacing: 1px;\n            margin-top: 0.5rem;\n        }\n\n        @keyframes glow-pulse {\n            0%, 100% { text-shadow: 0 0 30px rgba(16, 185, 129, 0.5); }\n            50% { text-shadow: 0 0 40px rgba(16, 185, 129, 0.8), 0 0 60px rgba(52, 211, 153, 0.6); }\n        }\n\n        .animated-number {\n            font-weight: 800;\n            color: #10B981;\n            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);\n        }\n\n        /* Dangerous Red Theme for Before Panel */\n        .danger-zone {\n            background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #B22222 100%) !important;\n            border: 3px solid #FF0000;\n            position: relative;\n            overflow: hidden;\n        }\n\n        .danger-zone::before {\n            content: '';\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"30\" fill=\"none\" stroke=\"%23FF0000\" stroke-width=\"2\" opacity=\"0.1\"/></svg>');\n            animation: danger-pulse 2s ease-in-out infinite;\n            z-index: 1;\n        }\n\n        .danger-header {\n            position: absolute;\n            top: 2rem;\n            left: 50%;\n            transform: translateX(-50%);\n            text-align: center;\n            z-index: 10;\n        }\n\n        .danger-title {\n            font-size: 2.2rem;\n            font-weight: 900;\n            color: #FFFFFF;\n            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);\n            animation: shake 0.5s ease-in-out infinite;\n            margin-bottom: 1rem;\n        }\n\n        .panic-badge {\n            background: linear-gradient(135deg, #FF0000 0%, #8B0000 100%);\n            color: white;\n            padding: 12px 24px;\n            border-radius: 25px;\n            font-size: 1rem;\n            font-weight: 700;\n            letter-spacing: 2px;\n            animation: blink 1s ease-in-out infinite;\n            border: 2px solid #FFFF00;\n            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);\n        }\n\n        .danger-warnings {\n            position: absolute;\n            top: 8rem;\n            left: 2rem;\n            z-index: 10;\n        }\n\n        .warning-item {\n            color: #FFFF00;\n            font-size: 1.1rem;\n            font-weight: 700;\n            margin-bottom: 0.5rem;\n            text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);\n            animation: flicker 1.5s ease-in-out infinite;\n        }\n\n        .danger-metrics {\n            position: absolute;\n            bottom: 8rem;\n            left: 50%;\n            transform: translateX(-50%);\n            display: flex;\n            gap: 2rem;\n            background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(220, 20, 60, 0.9) 100%);\n            padding: 2rem 3rem;\n            border-radius: 20px;\n            border: 2px solid #FF0000;\n            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);\n            z-index: 10;\n        }\n\n        .metric-danger {\n            text-align: center;\n        }\n\n        .danger-number {\n            font-size: 2.5rem;\n            font-weight: 900;\n            color: #FFFF00;\n            text-shadow: 0 0 15px rgba(255, 255, 0, 0.8);\n            animation: pulse-danger 1.5s ease-in-out infinite;\n        }\n\n        .danger-label {\n            font-size: 0.9rem;\n            color: #FFFFFF;\n            font-weight: 600;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin-top: 0.5rem;\n        }\n\n        .panic-cta {\n            position: absolute;\n            bottom: 2rem;\n            left: 50%;\n            transform: translateX(-50%);\n            text-align: center;\n            z-index: 10;\n        }\n\n        .emergency-btn {\n            background: linear-gradient(135deg, #FF4500 0%, #FF0000 100%);\n            color: white;\n            border: none;\n            padding: 1rem 2.5rem;\n            border-radius: 50px;\n            font-size: 1.2rem;\n            font-weight: 900;\n            letter-spacing: 2px;\n            cursor: pointer;\n            animation: emergency-pulse 0.8s ease-in-out infinite;\n            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);\n            border: 3px solid #FFFF00;\n            text-transform: uppercase;\n        }\n\n        .urgency-text {\n            color: #FFFF00;\n            font-size: 0.9rem;\n            font-weight: 600;\n            margin-top: 1rem;\n            animation: flicker 2s ease-in-out infinite;\n            text-shadow: 0 0 10px rgba(255, 255, 0, 0.6);\n        }\n\n        @keyframes danger-pulse {\n            0%, 100% { opacity: 0.1; }\n            50% { opacity: 0.3; }\n        }\n\n        @keyframes shake {\n            0%, 100% { transform: translateX(0); }\n            25% { transform: translateX(-2px); }\n            75% { transform: translateX(2px); }\n        }\n\n        @keyframes blink {\n            0%, 50% { opacity: 1; }\n            51%, 100% { opacity: 0.7; }\n        }\n\n        @keyframes flicker {\n            0%, 100% { opacity: 1; }\n            50% { opacity: 0.6; }\n        }\n\n        @keyframes pulse-danger {\n            0%, 100% { transform: scale(1); }\n            50% { transform: scale(1.1); }\n        }\n\n        @keyframes emergency-pulse {\n            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }\n            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 0, 0, 1); }\n        }\n\n        /* Premium Green/Gold Theme for After Panel */\n        .premium-zone {\n            background: linear-gradient(135deg, #006400 0%, #228B22 30%, #32CD32 70%, #FFD700 100%) !important;\n            border: 3px solid #FFD700;\n            position: relative;\n            overflow: hidden;\n        }\n\n        .premium-zone::before {\n            content: '';\n            position: absolute;\n            top: 0;\n            left: 0;\n            right: 0;\n            bottom: 0;\n            background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><polygon points=\"50,10 60,40 90,40 70,60 80,90 50,75 20,90 30,60 10,40 40,40\" fill=\"%23FFD700\" opacity=\"0.1\"/></svg>');\n            animation: gold-sparkle 3s ease-in-out infinite;\n            z-index: 1;\n        }\n\n        .premium-header {\n            position: absolute;\n            top: 2rem;\n            left: 50%;\n            transform: translateX(-50%);\n            text-align: center;\n            z-index: 10;\n        }\n\n        .premium-title {\n            font-size: 2.2rem;\n            font-weight: 900;\n            color: #FFD700;\n            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);\n            animation: golden-glow 2s ease-in-out infinite;\n            margin-bottom: 1rem;\n        }\n\n        .champion-badge {\n            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);\n            color: #006400;\n            padding: 12px 24px;\n            border-radius: 25px;\n            font-size: 1rem;\n            font-weight: 700;\n            letter-spacing: 2px;\n            animation: champion-shine 2s ease-in-out infinite;\n            border: 2px solid #FFFFFF;\n            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);\n        }\n\n        .trust-elements {\n            position: absolute;\n            top: 8rem;\n            left: 2rem;\n            z-index: 10;\n        }\n\n        .trust-item {\n            color: #FFFFFF;\n            font-size: 1.1rem;\n            font-weight: 700;\n            margin-bottom: 0.5rem;\n            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);\n            animation: trust-glow 2s ease-in-out infinite;\n        }\n\n        .premium-metrics {\n            position: absolute;\n            bottom: 8rem;\n            left: 50%;\n            transform: translateX(-50%);\n            display: flex;\n            gap: 2rem;\n            background: linear-gradient(135deg, rgba(0, 100, 0, 0.9) 0%, rgba(255, 215, 0, 0.2) 50%, rgba(0, 100, 0, 0.9) 100%);\n            padding: 2rem 3rem;\n            border-radius: 20px;\n            border: 2px solid #FFD700;\n            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);\n            z-index: 10;\n        }\n\n        .metric-premium {\n            text-align: center;\n        }\n\n        .success-number {\n            font-size: 2.5rem;\n            font-weight: 900;\n            color: #FFD700;\n            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);\n            animation: success-pulse 1.5s ease-in-out infinite;\n        }\n\n        .success-label {\n            font-size: 0.9rem;\n            color: #FFFFFF;\n            font-weight: 600;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n            margin-top: 0.5rem;\n        }\n\n        .success-cta {\n            position: absolute;\n            bottom: 2rem;\n            left: 50%;\n            transform: translateX(-50%);\n            text-align: center;\n            z-index: 10;\n        }\n\n        .premium-btn {\n            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);\n            color: #006400;\n            border: none;\n            padding: 1rem 2.5rem;\n            border-radius: 50px;\n            font-size: 1.2rem;\n            font-weight: 900;\n            letter-spacing: 2px;\n            cursor: pointer;\n            animation: premium-pulse 1.2s ease-in-out infinite;\n            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);\n            border: 3px solid #FFFFFF;\n            text-transform: uppercase;\n        }\n\n        .confidence-text {\n            color: #FFFFFF;\n            font-size: 0.9rem;\n            font-weight: 600;\n            margin-top: 1rem;\n            animation: confidence-glow 2.5s ease-in-out infinite;\n            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);\n        }\n\n        @keyframes gold-sparkle {\n            0%, 100% { opacity: 0.1; transform: rotate(0deg); }\n            50% { opacity: 0.3; transform: rotate(180deg); }\n        }\n\n        @keyframes golden-glow {\n            0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }\n            50% { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 165, 0, 0.8); }\n        }\n\n        @keyframes champion-shine {\n            0%, 100% { transform: scale(1); }\n            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(255, 215, 0, 1); }\n        }\n\n        @keyframes trust-glow {\n            0%, 100% { opacity: 1; }\n            50% { opacity: 0.8; text-shadow: 0 0 15px rgba(255, 255, 255, 1); }\n        }\n\n        @keyframes success-pulse {\n            0%, 100% { transform: scale(1); }\n            50% { transform: scale(1.1); }\n        }\n\n        @keyframes premium-pulse {\n            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }\n            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 215, 0, 1); }\n        }\n\n        @keyframes confidence-glow {\n            0%, 100% { opacity: 1; }\n            50% { opacity: 0.8; }\n        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for screen readers -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Professional Loading Screen with Zuvomo Brand -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <div class="loading-icon">
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Zuvomo Z Logo Recreation -->
+                    <path d="M12 18C12 16.3431 13.3431 15 15 15H36C37.6569 15 39 16.3431 39 18C39 19.6569 37.6569 21 36 21H22.2426L45.6213 44.3787C46.7929 45.5503 46.7929 47.4497 45.6213 48.6213C44.4497 49.7929 42.5503 49.7929 41.3787 48.6213L18 25.2426V39C18 40.6569 16.6569 42 15 42C13.3431 42 12 40.6569 12 39V18Z" fill="#4B5563"/>
+                    <path d="M21 33C21 31.3431 22.3431 30 24 30H45C46.6569 30 48 31.3431 48 33C48 34.6569 46.6569 36 45 36H31.2426L54.6213 59.3787C55.7929 60.5503 55.7929 62.4497 54.6213 63.6213C53.4497 64.7929 51.5503 64.7929 50.3787 63.6213L27 40.2426V54C27 55.6569 25.6569 57 24 57C22.3431 57 21 55.6569 21 54V33Z" fill="#3B82F6"/>
+                </svg>
+            </div>
+            <div class="loading-text">
+                <div style="font-size: 1.8rem; font-weight: 800; color: var(--text-primary);">Zuvomo</div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-top: -2px;">Startup Funding Launchpad</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Navigation -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="logo" aria-label="Zuvomo Homepage">
+                <img src="assets/zuvomo_01.png" alt="Zuvomo Market Making Services" class="logo-image">
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#problem">Challenge</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            
+            <a href="#contact" class="nav-cta">Get Started</a>
+            
+            <div class="mobile-toggle" id="mobileToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Enhanced Hero Section -->
+    <main id="main-content">
+        <section class="hero" style="background: #2F3A63;" aria-labelledby="hero-title">
+            <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🚀</span>
+                    <span>Trusted in Web3 Since 2017</span>
+                </div>
+
+                <h1 id="hero-title" class="hero-title">
+                    <span class="brand-name">ZUVOMO</span><br>
+                    <span class="tagline">Transform your token's market performance</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Professional market making with $500M+ fundraising expertise across 60+ exchanges.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">
+                        <span>Start Your Journey</span>
+                        <span>→</span>
+                    </a>
+                    <a href="#solution" class="btn-secondary">
+                        <span>See How It Works</span>
+                        <span>↓</span>
+                    </a>
+                </div>
+                
+                <div class="hero-trust">
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span><span class="animated-number" data-target="60">0</span>+ Global Exchanges</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span>$<span class="animated-number" data-target="150">0</span>M+ Volume Managed</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-icon">✓</div>
+                        <span><span class="animated-number" data-target="8">0</span> Years Experience</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Spline 3D Animation -->
+            <div class="hero-visual">
+                <div class="spline-container">
+                    <iframe 
+                        src='https://my.spline.design/unchained-7WjKKIv4iNObmmAwBya2xiT6/' 
+                        frameborder='0' 
+                        width='100%' 
+                        height='100%'
+                        loading="eager"
+                        allow="autoplay; fullscreen; xr-spatial-tracking; gyroscope; accelerometer"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In The News Carousel Section -->
+    <section class="news-section">
+        <div class="container">
+            <div class="news-title">
+                <h2>In The News</h2>
+                <p>Trusted by leading media outlets worldwide</p>
+            </div>
+
+            <div class="news-carousel">
+                <div class="news-track">
+                    <!-- First set of news logos -->
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="18" font-weight="700">Forbes</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="15" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="600">FINANCIAL EXPRESS</text>
+                            <text x="60" y="28" text-anchor="middle" fill="#0066cc" font-family="Arial" font-size="8">Read to Lead</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#00a651" font-family="Arial" font-size="20" font-weight="700">mint</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#1a1a1a" font-family="Arial" font-size="24" font-weight="900">ET</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="500">INDIA</text>
+                            <text x="60" y="30" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="500">TODAY</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="12" font-weight="400">Hindustan</text>
+                            <text x="60" y="30" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="12" font-weight="700">Times</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="15" width="80" height="10" rx="2" fill="#f0f0f0" stroke="#ccc"/>
+                            <text x="60" y="22" text-anchor="middle" fill="#666" font-family="Arial" font-size="8">YOURSTORY</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="20" y="20" fill="#00a0e6" font-family="Arial" font-size="14" font-weight="700">bt</text>
+                            <text x="40" y="20" fill="#666" font-family="Arial" font-size="12">Business Today</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="11" font-weight="700">THE HINDU</text>
+                        </svg>
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="18" font-weight="700">Forbes</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="15" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="600">FINANCIAL EXPRESS</text>
+                            <text x="60" y="28" text-anchor="middle" fill="#0066cc" font-family="Arial" font-size="8">Read to Lead</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#00a651" font-family="Arial" font-size="20" font-weight="700">mint</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="25" text-anchor="middle" fill="#1a1a1a" font-family="Arial" font-size="24" font-weight="900">ET</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="500">INDIA</text>
+                            <text x="60" y="30" text-anchor="middle" fill="#666" font-family="Arial" font-size="10" font-weight="500">TODAY</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="12" font-weight="400">Hindustan</text>
+                            <text x="60" y="30" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="12" font-weight="700">Times</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="15" width="80" height="10" rx="2" fill="#f0f0f0" stroke="#ccc"/>
+                            <text x="60" y="22" text-anchor="middle" fill="#666" font-family="Arial" font-size="8">YOURSTORY</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="20" y="20" fill="#00a0e6" font-family="Arial" font-size="14" font-weight="700">bt</text>
+                            <text x="40" y="20" fill="#666" font-family="Arial" font-size="12">Business Today</text>
+                        </svg>
+                    </div>
+                    <div class="news-item">
+                        <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <text x="60" y="18" text-anchor="middle" fill="#1a1a1a" font-family="serif" font-size="11" font-weight="700">THE HINDU</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Redesigned Before/After Comparison Section -->
+    <section id="problem" class="dramatic-comparison" style="background: #2F3A63; padding: 3rem 2rem; position: relative;">
+        <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+            <div class="section-header scroll-reveal" style="text-align: center; margin-bottom: 2rem;">
+                <div class="section-badge" style="background: rgba(255, 255, 255, 0.1); color: white; padding: 0.8rem 1.5rem; border-radius: 50px; display: inline-block; font-weight: 600; margin-bottom: 1.5rem;">The Challenge & Solution</div>
+                <h2 class="section-title" style="font-size: 3.5rem; font-weight: 800; color: white; margin-bottom: 1.5rem;">See the Dramatic Difference</h2>
+                <p class="section-description" style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); max-width: 600px; margin: 0 auto;">
+                    The stark reality of market making - Your choice determines your token's fate.
+                </p>
+            </div>
+            
+            <!-- Clean Side-by-Side Comparison -->
+            <div class="comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; position: relative;">
+
+                <!-- LEFT: Without Zuvomo -->
+                <div class="comparison-card danger-card" style="background: linear-gradient(135deg, #991B1B 0%, #B91C1C 100%); border-radius: 24px; padding: 2rem; position: relative; overflow: hidden; border: 2px solid #DC2626; box-shadow: 0 10px 30px rgba(153, 27, 27, 0.2); max-width: 600px;">
+
+                    <div style="position: relative; z-index: 10;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: white;">WITHOUT ZUVOMO</div>
+                            <div style="background: rgba(255, 255, 255, 0.15); color: white; padding: 8px 16px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; margin-top: 1rem; border: 1px solid rgba(255, 255, 255, 0.3);">Poor Liquidity Management</div>
+                        </div>
+
+
+                        <!-- Bad Liquidity Orderbook -->
+                        <div id="badOrderbook" style="height: 280px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 1rem; margin: 2rem 0; position: relative; font-family: 'Courier New', monospace; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: #FCA5A5; font-size: 0.85rem; font-weight: 600;">Low Liquidity</div>
+
+                            <!-- Ask Orders (Sellers) -->
+                            <div style="position: absolute; top: 35px; left: 10px; right: 10px;">
+                                <div style="color: #FF6B6B; font-size: 0.7rem; font-weight: 600; margin-bottom: 5px;">ASKS (SELLING)</div>
+                                <div class="bad-ask-order" style="display: flex; justify-content: space-between; color: #FF6B6B; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.8;">
+                                    <span>1.2457</span><span>45</span><span>$56</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.7rem; margin-bottom: 2px;">
+                                    <span>1.2440</span><span>---</span><span>---</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.7rem; margin-bottom: 2px;">
+                                    <span>1.2420</span><span>---</span><span>---</span>
+                                </div>
+                                <div class="bad-ask-order" style="display: flex; justify-content: space-between; color: #FF6B6B; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.6;">
+                                    <span>1.2405</span><span>80</span><span>$99</span>
+                                </div>
+                            </div>
+
+                            <!-- Spread Indicator -->
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(239, 68, 68, 0.9); padding: 5px 15px; border-radius: 12px; color: white; font-size: 0.75rem; font-weight: 600;">
+                                SPREAD: 2.0%
+                            </div>
+
+                            <!-- Bid Orders (Buyers) -->
+                            <div style="position: absolute; bottom: 50px; left: 10px; right: 10px;">
+                                <div style="color: #FF6B6B; font-size: 0.7rem; font-weight: 600; margin-bottom: 5px;">BIDS (BUYING)</div>
+                                <div class="bad-bid-order" style="display: flex; justify-content: space-between; color: #FF6B6B; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.5;">
+                                    <span>1.2180</span><span>120</span><span>$146</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.7rem; margin-bottom: 2px;">
+                                    <span>1.2160</span><span>---</span><span>---</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; color: #666; font-size: 0.7rem; margin-bottom: 2px;">
+                                    <span>1.2140</span><span>---</span><span>---</span>
+                                </div>
+                                <div class="bad-bid-order" style="display: flex; justify-content: space-between; color: #FF6B6B; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.4;">
+                                    <span>1.2100</span><span>200</span><span>$242</span>
+                                </div>
+                            </div>
+
+                            <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: #FCA5A5; font-size: 0.7rem; font-weight: 600;">Limited Market Activity</div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-around; margin: 2rem 0; background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.2);">
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #FCA5A5;">3.2%</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">SPREAD</div></div>
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #FCA5A5;">15.8%</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">SLIPPAGE</div></div>
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #FCA5A5;">800</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">VOLUME</div></div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; font-weight: 500; line-height: 1.6;">High spreads and low liquidity lead to poor trading experience and reduced investor confidence.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: With Zuvomo -->
+                <div class="comparison-card success-card" style="background: linear-gradient(135deg, #047857 0%, #059669 100%); border-radius: 24px; padding: 2rem; position: relative; overflow: hidden; border: 2px solid #10B981; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2); max-width: 600px;">
+
+                    <div style="position: relative; z-index: 10;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="font-size: 1.8rem; font-weight: 800; color: white;">WITH ZUVOMO</div>
+                            <div style="background: rgba(255, 255, 255, 0.2); color: white; padding: 8px 16px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; margin-top: 1rem; border: 1px solid rgba(255, 255, 255, 0.4);">Professional Market Making</div>
+                        </div>
+
+
+                        <!-- Good Liquidity Orderbook -->
+                        <div id="goodOrderbook" style="height: 280px; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 1rem; margin: 2rem 0; position: relative; font-family: 'Courier New', monospace; border: 1px solid rgba(255, 255, 255, 0.3);">
+                            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: #A7F3D0; font-size: 0.85rem; font-weight: 600;">Deep Liquidity Pool</div>
+
+                            <!-- Ask Orders (Sellers) -->
+                            <div style="position: absolute; top: 35px; left: 10px; right: 10px;">
+                                <div style="color: #A7F3D0; font-size: 0.7rem; font-weight: 600; margin-bottom: 5px;">ASKS (SELLING)</div>
+                                <div class="good-ask-order" style="display: flex; justify-content: space-between; color: #A7F3D0; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.9;">
+                                    <span>1.2235</span><span>8,450</span><span>$10.3K</span>
+                                </div>
+                                <div class="good-ask-order" style="display: flex; justify-content: space-between; color: #A7F3D0; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.8;">
+                                    <span>1.2234</span><span>12,800</span><span>$15.7K</span>
+                                </div>
+                                <div class="good-ask-order" style="display: flex; justify-content: space-between; color: #A7F3D0; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.9;">
+                                    <span>1.2233</span><span>15,670</span><span>$19.2K</span>
+                                </div>
+                                <div class="good-ask-order" style="display: flex; justify-content: space-between; color: #A7F3D0; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.7;">
+                                    <span>1.2232</span><span>9,340</span><span>$11.4K</span>
+                                </div>
+                            </div>
+
+                            <!-- Spread Indicator -->
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(16, 185, 129, 0.9); padding: 5px 15px; border-radius: 12px; color: white; font-size: 0.75rem; font-weight: 600;">
+                                SPREAD: 0.01%
+                            </div>
+
+                            <!-- Bid Orders (Buyers) -->
+                            <div style="position: absolute; bottom: 50px; left: 10px; right: 10px;">
+                                <div style="color: #A7F3D0; font-size: 0.7rem; font-weight: 600; margin-bottom: 5px;">BIDS (BUYING)</div>
+                                <div class="good-bid-order" style="display: flex; justify-content: space-between; color: #6EE7B7; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.9;">
+                                    <span>1.2231</span><span>11,250</span><span>$13.8K</span>
+                                </div>
+                                <div class="good-bid-order" style="display: flex; justify-content: space-between; color: #6EE7B7; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.8;">
+                                    <span>1.2230</span><span>18,900</span><span>$23.1K</span>
+                                </div>
+                                <div class="good-bid-order" style="display: flex; justify-content: space-between; color: #6EE7B7; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.7;">
+                                    <span>1.2229</span><span>14,580</span><span>$17.8K</span>
+                                </div>
+                                <div class="good-bid-order" style="display: flex; justify-content: space-between; color: #6EE7B7; font-size: 0.7rem; margin-bottom: 2px; opacity: 0.9;">
+                                    <span>1.2228</span><span>22,400</span><span>$27.4K</span>
+                                </div>
+                            </div>
+
+                            <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: #A7F3D0; font-size: 0.7rem; font-weight: 600;">AI-Powered 24/7 Trading</div>
+                        </div>
+
+                        <div style="display: flex; justify-content: space-around; margin: 2rem 0; background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.3);">
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #A7F3D0;">0.08%</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">SPREAD</div></div>
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #A7F3D0;">0.2%</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">SLIPPAGE</div></div>
+                            <div style="text-align: center;"><div style="font-size: 2rem; font-weight: 800; color: #A7F3D0;">85K</div><div style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.8); font-weight: 500;">VOLUME</div></div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <div style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; font-weight: 500; line-height: 1.6;">Tight spreads and deep liquidity ensure smooth trading and attract serious investors to your token.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Central VS Element -->
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 800; color: white; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4); z-index: 20; border: 3px solid white;">VS</div>        </div>
+
+        <!-- Contact Us CTA Section -->
+        <div style="text-align: center; margin: 3rem 0 0 0;">
+            <div style="margin-bottom: 2rem;">
+                <h3 style="color: white; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Ready to Transform Your Token's Liquidity?</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Join 500+ successful projects that chose Zuvomo for professional market making</p>
+            </div>
+            <button onclick="window.location.href='mailto:hello@zuvomo.com'" aria-label="Contact Zuvomo for market making services" style="background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%); color: white; border: none; padding: 1.2rem 3rem; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); transition: all 0.3s ease;">
+                Contact Us Today
+            </button>
+        </div>
+    </section>
+
+    <!-- Clean Minimalist Partner Exchanges Section -->
+    <section id="partners" class="partners-section" style="padding: 2rem 2rem 3rem 2rem; background: #2F3A63; position: relative; overflow: hidden;">
+        <div class="partners-container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div class="scroll-reveal">
+                <h2 style="font-size: 3.5rem; font-weight: 800; color: white; margin-bottom: 2rem; letter-spacing: -1px; text-transform: uppercase;">
+                    PARTNER EXCHANGES
+                </h2>
+            </div>
+
+            <!-- Horizontal Moving Carousel -->
+            <div class="exchanges-carousel scroll-reveal" style="position: relative; width: 100%; overflow: hidden; margin-bottom: 2rem;">
+                <div class="exchanges-track" style="display: flex; animation: scrollExchanges 25s linear infinite; gap: 3rem;">
+                    <!-- First set of exchanges -->
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/Bybit.png" alt="Bybit" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/GATE.png" alt="Gate.io" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/KUCOIN 3.png" alt="KuCoin" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/UNISWAP.png" alt="Uniswap" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/bitget.png" alt="Bitget" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/bitmart.png" alt="Bitmart" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/mexc.png" alt="MEXC" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/pool.png" alt="Pool" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/Bybit.png" alt="Bybit" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/GATE.png" alt="Gate.io" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/KUCOIN 3.png" alt="KuCoin" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/UNISWAP.png" alt="Uniswap" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/bitget.png" alt="Bitget" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/bitmart.png" alt="Bitmart" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/mexc.png" alt="MEXC" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                    <div class="exchange-item" style="flex: 0 0 auto; width: 120px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 16px; backdrop-filter: blur(15px); transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.2);">
+                        <img src="assets/pool.png" alt="Pool" style="width: 60px; height: 60px; object-fit: contain; filter: brightness(1.2);">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple "AND 100+ MORE" text -->
+            <div class="scroll-reveal" style="margin: 2rem 0 1rem 0;">
+                <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;">
+                    AND 100+ MORE
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Trusted Projects Section -->
+    <section class="trusted-projects-section" style="background: #1e293b; padding: 3rem 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <div style="margin-bottom: 2rem;">
+                <h2 style="color: white; font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Trusted by Leading Projects</h2>
+                <p style="color: #B0C4DE; font-size: 1.1rem; margin-bottom: 2rem;">Join 500+ successful blockchain projects that trust Zuvomo</p>
+            </div>
+
+            <!-- Horizontal Scrolling Logo Carousel -->
+            <div style="position: relative; width: 100%; overflow: hidden; border-radius: 20px; background: rgba(255,255,255,0.05); padding: 2rem 0;">
+                <div style="display: flex; animation: scrollLogos 30s linear infinite; gap: 4rem; align-items: center;">
+                    <!-- Real Crypto Project Logos -->
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Dexcheck (1).png" alt="Dexcheck" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Fomofund (1).png" alt="FomoFund" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Landshare (1).png" alt="Landshare" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Morpheus (1).png" alt="Morpheus" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Pencils Protocol (1).png" alt="Pencils Protocol" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Vulcan (1).png" alt="Vulcan" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Zebec (1).png" alt="Zebec" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Dexcheck (1).png" alt="Dexcheck" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Fomofund (1).png" alt="FomoFund" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Landshare (1).png" alt="Landshare" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                    <div class="logo-container" style="flex: 0 0 auto; min-width: 150px; height: 80px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.15); border-radius: 12px; border: 2px solid rgba(255,255,255,0.3); padding: 12px; transition: all 0.3s ease;">
+                        <img src="assets/Morpheus (1).png" alt="Morpheus" style="max-width: 100%; max-height: 60px; object-fit: contain; background: white; border-radius: 8px; padding: 8px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Metrics -->
+            <div style="display: flex; justify-content: center; gap: 4rem; margin-top: 3rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="color: #FFD700; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">500+</div>
+                    <div style="color: #B0C4DE; font-size: 0.9rem; font-weight: 600;">Projects Served</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #FFD700; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">$150M+</div>
+                    <div style="color: #B0C4DE; font-size: 0.9rem; font-weight: 600;">Volume Managed</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #FFD700; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">99.9%</div>
+                    <div style="color: #B0C4DE; font-size: 0.9rem; font-weight: 600;">Uptime</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #FFD700; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">24/7</div>
+                    <div style="color: #B0C4DE; font-size: 0.9rem; font-weight: 600;">Support</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSS Animation for Logo Scroll -->
+        <style>
+            @keyframes scrollLogos {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            @keyframes pulse {
+                0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+        /* Mobile Responsive Styles for Comparison Sections */
+        @media (max-width: 768px) {
+            /* Dramatic Comparison Section Mobile */
+            .dramatic-comparison {
+                padding: 2rem 1rem !important;
+            }
+
+            .dramatic-comparison .section-title {
+                font-size: 2rem !important;
+            }
+
+            .dramatic-comparison .section-description {
+                font-size: 1rem !important;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+
+            .comparison-card {
+                max-width: 100% !important;
+            }
+
+            /* Adjust VS element for mobile */
+            .comparison-grid > div[style*="position: absolute"] {
+                position: relative !important;
+                transform: none !important;
+                margin: 1rem auto !important;
+                left: auto !important;
+                top: auto !important;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .comparison-grid {
+                gap: 2rem !important;
+            }
+        }
+        </style>
+    </section>
+
+    <!-- Professional Comparison Table Section -->
+    <section class="comparison-table-section" style="padding: 3rem 0;">
+        <div class="comparison-table-container">
+            <div class="comparison-table-title">
+                <h2>Why Choose ZUVOMO</h2>
+                <p>See how ZUVOMO outperforms other market makers in every key area</p>
+            </div>
+
+            <div class="professional-table" role="region" aria-label="Feature comparison table">
+                <table role="table" aria-label="Comparison between ZUVOMO and other market makers">
+                    <thead>
+                        <tr>
+                            <th scope="col" tabindex="0">Features</th>
+                            <th scope="col" tabindex="0" aria-describedby="zuvomo-description">ZUVOMO</th>
+                            <th scope="col" tabindex="0">Other Market Makers</th>
+                        </tr>
+                    </thead>
+                    <div id="zuvomo-description" class="sr-only">Our premium market making service with all features included</div>
+                    <tbody>
+                        <tr>
+                            <td>Multi-Exchange Support</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Yes (CEX + DEX)
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Limited or single exchange
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Advanced Algorithms & AI Integration</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Smart trading algorithms
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Mostly manual or outdated systems
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Onboarding & Reporting Dashboard</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Provide with analytics
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Basic or no dashboard
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Flexible Contract Terms</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Short/long-term options
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Rigid contracts
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Liquidity Pool Optimization</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Yes
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Not included
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Reputation & Compliance Focus</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Maintains clean trading record
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Involved in grey practices
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Real-Time Monitoring & Adjustments</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Dynamic adjustments based on market conditions
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Static and delayed responses
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Integration with Tokenomics</td>
+                            <td class="advantage-cell">
+                                <div class="advantage-text">
+                                    <span class="check-icon">✓</span>
+                                    Aligned with token supply & goals
+                                </div>
+                            </td>
+                            <td class="disadvantage-cell">
+                                <div class="disadvantage-text">
+                                    <span class="cross-icon">✗</span>
+                                    Often unaligned with project needs
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Testimonials Section -->
+    <section id="testimonials" class="testimonials-section" style="background: #2F3A63;">
+        <div class="container">
+            <div class="section-header scroll-reveal">
+                <div class="section-badge">Client Success Stories</div>
+                <h2 class="section-title">Trusted by Leading Blockchain Projects</h2>
+                <p class="section-description">
+                    Growing blockchain projects with optimized liquidity and market performance.
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-quote">
+                        Zuvomo transformed our token liquidity overnight. Perfect strategic partner for ambitious DeFi projects. Results exceeded expectations.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SC</div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>Chief Technology Officer, DeFiNext Protocol</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-quote">
+                        Unique combination of fundraising expertise and market making. Strategic approach delivered exceptional results.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Marcus Rodriguez</h4>
+                            <p>Founder & CEO, ChainVault Technologies</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card scroll-reveal">
+                    <p class="testimonial-quote">
+                        Their 24/7 global coverage and completely transparent operations gave us total confidence from day one. We saw immediate improvements in our token's trading volume, price stability, and overall market health. The professional team at Zuvomo truly understands the complexities of modern digital asset markets.
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PP</div>
+                        <div class="author-info">
+                            <h4>Priya Patel</h4>
+                            <p>Chief Executive Officer, TokenForge Innovations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Call-to-Action Section -->
+    <section id="contact" class="cta-section" style="background: #2F3A63;">
+        <div class="cta-content scroll-reveal">
+            <h2 class="cta-title">Ready to Transform Your Token's Market Performance?</h2>
+            <p class="cta-description">
+                Join the 50+ successful blockchain projects that chose Zuvomo for their comprehensive growth journey. Let's optimize your token's market performance and build sustainable, deep liquidity together with our proven expertise.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:hello@zuvomo.com" class="btn-white">Get Free Strategic Consultation</a>
+                <a href="tel:+91" class="btn-outline">Schedule Discovery Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Professional Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <img src="assets/zuvomo_01.png" alt="Zuvomo" style="width: 80px; height: 80px; margin-right: 16px; object-fit: contain;">
+                    <h3 style="font-size: 1.5rem; font-weight: 800;">Zuvomo</h3>
+                </div>
+                <p>
+                    Professional market making and fundraising expertise for blockchain startups since 2017. Your strategic partner for sustainable growth.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">📧</a>
+                    <a href="#" class="social-link">💼</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📱</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <a href="#services">Professional Market Making</a>
+                <a href="#services">Institutional Liquidity Provision</a>
+                <a href="#services">Strategic Token Listings</a>
+                <a href="#services">Comprehensive Advisory Services</a>
+                <a href="#services">Growth Acceleration Programs</a>
+                <a href="#services">Advanced Risk Management</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <a href="/about">About Zuvomo</a>
+                <a href="/team">Leadership Team</a>
+                <a href="/blog">Insights & Research</a>
+                <a href="/careers">Career Opportunities</a>
+                <a href="/press">Press & Media</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <a href="mailto:hello@zuvomo.com">hello@zuvomo.com</a>
+                <a href="#">New Delhi, India</a>
+                <a href="tel:+91">+91 XXX XXX XXXX</a>
+                <a href="#">Professional LinkedIn</a>
+                <a href="#">Partnership Inquiries</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025. All rights reserved. | Professional Market Making Services</p>
+            <div style="display: flex; gap: 2rem;">
+                <a href="/privacy" style="color: var(--gray-400); text-decoration: none;">Privacy Policy</a>
+                <a href="/terms" style="color: var(--gray-400); text-decoration: none;">Terms of Service</a>
+                <a href="/legal" style="color: var(--gray-400); text-decoration: none;">Legal Disclaimers</a>
+            </div>
+        </div>
+    </footer>
+    </main>
+
+    <script>
+        // Professional Landing Page Enhancement System
+        class EnhancedProfessionalLandingPage {
+            constructor() {
+                this.currentView = 'before';
+                this.isLoaded = false;
+                this.init();
+            }
+
+            init() {
+                this.initLoadingSequence();
+                this.initScrollAnimations();
+                this.initNavigation();
+                this.initMobileMenu();
+                this.initSmoothScrolling();
+                this.initLiquiditySlider();
+                this.initLiveMetrics();
+                this.initServicesScroller();
+                this.initPerformanceOptimizations();
+            }
+
+            initLoadingSequence() {
+                // Professional loading sequence
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        const loadingScreen = document.getElementById('loadingScreen');
+                        if (loadingScreen) {
+                            loadingScreen.classList.add('fade-out');
+                            setTimeout(() => {
+                                loadingScreen.style.display = 'none';
+                                this.isLoaded = true;
+                            }, 500);
+                        }
+                    }, 1000);
+                });
+            }
+
+            initLiveMetrics() {
+                // Spline iframe handles its own animations
+                // No need for live metrics updates since we're using Spline now
+            }
+
+            initLiquiditySlider() {
+                // Enhanced auto-cycle with smooth transitions
+                setInterval(() => {
+                    if (this.isLoaded) {
+                        if (this.currentView === 'before') {
+                            this.showAfter();
+                        } else {
+                            this.showBefore();
+                        }
+                    }
+                }, 8000);
+            }
+
+            showBefore() {
+                this.currentView = 'before';
+                const sliderContent = document.getElementById('sliderContent');
+                const beforeBtn = document.querySelector('.before-btn');
+                const afterBtn = document.querySelector('.after-btn');
+                
+                if (sliderContent) {
+                    sliderContent.classList.remove('show-after');
+                }
+                
+                if (beforeBtn && afterBtn) {
+                    beforeBtn.classList.add('active');
+                    afterBtn.classList.remove('active');
+                }
+            }
+
+            showAfter() {
+                this.currentView = 'after';
+                const sliderContent = document.getElementById('sliderContent');
+                const beforeBtn = document.querySelector('.before-btn');
+                const afterBtn = document.querySelector('.after-btn');
+                
+                if (sliderContent) {
+                    sliderContent.classList.add('show-after');
+                }
+                
+                if (beforeBtn && afterBtn) {
+                    beforeBtn.classList.remove('active');
+                    afterBtn.classList.add('active');
+                }
+            }
+
+            initScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            
+                            // Add staggered animation for cards
+                            if (entry.target.closest('.exchanges-showcase') || 
+                                entry.target.closest('.services-grid') || 
+                                entry.target.closest('.testimonials-grid')) {
+                                const cards = entry.target.parentElement.children;
+                                Array.from(cards).forEach((card, index) => {
+                                    setTimeout(() => {
+                                        card.classList.add('visible');
+                                    }, index * 100);
+                                });
+                            }
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.scroll-reveal').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            initNavigation() {
+                const navbar = document.getElementById('navbar');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            initMobileMenu() {
+                const mobileToggle = document.getElementById('mobileToggle');
+                const navMenu = document.querySelector('.nav-menu');
+                
+                if (mobileToggle && navMenu) {
+                    mobileToggle.addEventListener('click', () => {
+                        navMenu.classList.toggle('active');
+                        mobileToggle.classList.toggle('active');
+                    });
+                }
+            }
+
+            initSmoothScrolling() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            const offsetTop = target.offsetTop - 100;
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+
+            initPerformanceOptimizations() {
+                // Implement performance optimizations
+                
+                // Lazy loading for images
+                if ('IntersectionObserver' in window) {
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                img.src = img.dataset.src;
+                                img.classList.remove('lazy');
+                                imageObserver.unobserve(img);
+                            }
+                        });
+                    });
+
+                    document.querySelectorAll('img[data-src]').forEach(img => {
+                        imageObserver.observe(img);
+                    });
+                }
+
+                // Prefetch critical resources
+                const prefetchLinks = [
+                    'https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap',
+                    'mailto:hello@zuvomo.com'
+                ];
+
+                prefetchLinks.forEach(href => {
+                    const link = document.createElement('link');
+                    link.rel = 'prefetch';
+                    link.href = href;
+                    document.head.appendChild(link);
+                });
+            }
+
+            initServicesScroller() {
+                // Initialize paginated services scroller
+                const scrollLeft = document.getElementById('scrollLeft');
+                const scrollRight = document.getElementById('scrollRight');
+                const servicesScroller = document.getElementById('servicesScroller');
+                
+                if (!scrollLeft || !scrollRight || !servicesScroller) return;
+                
+                let currentPage = 0;
+                const totalPages = 2; // We have 2 pages (6 cards total)
+                
+                const updatePagePosition = () => {
+                    const translateX = -currentPage * 100;
+                    servicesScroller.style.transform = `translateX(${translateX}%)`;
+                };
+                
+                const updateButtonStates = () => {
+                    scrollLeft.style.opacity = currentPage === 0 ? '0.4' : '0.7';
+                    scrollRight.style.opacity = currentPage === totalPages - 1 ? '0.4' : '1';
+                };
+                
+                scrollLeft.addEventListener('click', () => {
+                    if (currentPage > 0) {
+                        currentPage--;
+                        updatePagePosition();
+                        updateButtonStates();
+                    }
+                });
+                
+                scrollRight.addEventListener('click', () => {
+                    if (currentPage < totalPages - 1) {
+                        currentPage++;
+                        updatePagePosition();
+                        updateButtonStates();
+                    }
+                });
+                
+                // Initial state
+                updateButtonStates();
+            }
+        }
+
+        // Global functions for slider control
+        function showBefore() {
+            enhancedLandingPage.showBefore();
+        }
+
+        function showAfter() {
+            enhancedLandingPage.showAfter();
+        }
+
+        // Initialize the enhanced landing page
+        let enhancedLandingPage;
+        document.addEventListener('DOMContentLoaded', () => {
+            enhancedLandingPage = new EnhancedProfessionalLandingPage();
+        });
+
+        // Add professional hover effects for exchange cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const exchangeCards = document.querySelectorAll('.exchange-card');
+            exchangeCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.15)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.05)';
+                });
+            });
+        });
+
+        // Enhanced analytics tracking
+        const trackUserInteraction = (action, element) => {
+            // Integrate with analytics service here
+        };
+
+        // Track CTA interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.btn-primary, .btn-secondary, .btn-white, .btn-outline').forEach(button => {
+                button.addEventListener('click', () => {
+                    trackUserInteraction('cta_click', button.textContent.trim());
+                });
+            });
+        });
+        // Dynamic Orderbook Animation Engine
+        function animateOrderbooks() {
+            // Bad Orderbook Animation - Sparse, Slow Updates
+            const badOrderbook = document.getElementById('badOrderbook');
+            const badAskOrders = badOrderbook ? badOrderbook.querySelectorAll('.bad-ask-order') : [];
+            const badBidOrders = badOrderbook ? badOrderbook.querySelectorAll('.bad-bid-order') : [];
+
+            // Good Orderbook Animation - Dense, Fast Updates
+            const goodOrderbook = document.getElementById('goodOrderbook');
+            const goodAskOrders = goodOrderbook ? goodOrderbook.querySelectorAll('.good-ask-order') : [];
+            const goodBidOrders = goodOrderbook ? goodOrderbook.querySelectorAll('.good-bid-order') : [];
+
+            // Bad orderbook - sparse, slow updates every 8-15 seconds
+            if (badAskOrders.length > 0) {
+                setInterval(() => {
+                    const randomOrder = badAskOrders[Math.floor(Math.random() * badAskOrders.length)];
+                    const spans = randomOrder.querySelectorAll('span');
+                    if (spans.length >= 2) {
+                        const newSize = Math.floor(Math.random() * 80) + 20;
+                        spans[1].textContent = newSize;
+                        spans[2].textContent = '$' + Math.floor(newSize * 1.24);
+                        randomOrder.style.background = 'rgba(255,0,0,0.3)';
+                        setTimeout(() => {
+                            randomOrder.style.background = 'transparent';
+                        }, 300);
+                    }
+                }, Math.random() * 7000 + 8000);
+            }
+
+            // Good orderbook - dense, fast updates every 1-3 seconds
+            if (goodAskOrders.length > 0) {
+                setInterval(() => {
+                    const randomOrder = goodAskOrders[Math.floor(Math.random() * goodAskOrders.length)];
+                    const spans = randomOrder.querySelectorAll('span');
+                    if (spans.length >= 2) {
+                        const newSize = Math.floor(Math.random() * 15000) + 5000;
+                        const formattedSize = newSize.toLocaleString();
+                        spans[1].textContent = formattedSize;
+                        spans[2].textContent = '$' + Math.floor(newSize * 1.223 / 1000).toFixed(1) + 'K';
+                        randomOrder.style.background = 'rgba(255,215,0,0.2)';
+                        setTimeout(() => {
+                            randomOrder.style.background = 'transparent';
+                        }, 200);
+                    }
+                }, Math.random() * 2000 + 1000);
+            }
+        }
+
+        // Start orderbook animations when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                animateOrderbooks();
+            }, 2000);
+        });
+        // Animated Number Counters\n        function animateNumbers() {\n            const animatedNumbers = document.querySelectorAll('.animated-number');\n            \n            const animateNumber = (element, target, duration = 2000) => {\n                let start = 0;\n                const increment = target / (duration / 16);\n                \n                const timer = setInterval(() => {\n                    start += increment;\n                    if (start >= target) {\n                        element.textContent = target;\n                        clearInterval(timer);\n                    } else {\n                        element.textContent = Math.floor(start);\n                    }\n                }, 16);\n            };\n\n            animatedNumbers.forEach(element => {\n                const target = parseInt(element.dataset.target);\n                const observer = new IntersectionObserver((entries) => {\n                    entries.forEach(entry => {\n                        if (entry.isIntersecting) {\n                            animateNumber(element, target);\n                            observer.unobserve(element);\n                        }\n                    });\n                });\n                observer.observe(element);\n            });\n        }\n\n        // Enhanced Fear/Success Effects\n        function addPsychologicalEffects() {\n            // Add screen shake for danger zone\n            const dangerZone = document.querySelector('.danger-zone');\n            if (dangerZone) {\n                setInterval(() => {\n                    dangerZone.style.transform = `translateX(${Math.random() * 4 - 2}px) translateY(${Math.random() * 2 - 1}px)`;\n                    setTimeout(() => {\n                        dangerZone.style.transform = 'translateX(0) translateY(0)';\n                    }, 50);\n                }, 3000);\n            }\n\n            // Add sparkle effects for premium zone\n            const premiumZone = document.querySelector('.premium-zone');\n            if (premiumZone) {\n                setInterval(() => {\n                    const sparkle = document.createElement('div');\n                    sparkle.innerHTML = '\u2728';\n                    sparkle.style.position = 'absolute';\n                    sparkle.style.left = Math.random() * 100 + '%';\n                    sparkle.style.top = Math.random() * 100 + '%';\n                    sparkle.style.fontSize = '20px';\n                    sparkle.style.zIndex = '5';\n                    sparkle.style.animation = 'fadeInOut 2s ease-in-out';\n                    premiumZone.appendChild(sparkle);\n                    \n                    setTimeout(() => {\n                        sparkle.remove();\n                    }, 2000);\n                }, 1500);\n            }\n        }\n\n        // Initialize all animations\n        document.addEventListener('DOMContentLoaded', () => {\n            setTimeout(() => {\n                animateNumbers();\n                addPsychologicalEffects();\n            }, 1000);\n        });\n    </script>
+</body>
+</html>
