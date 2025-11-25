@@ -13,8 +13,8 @@ interface ScrollCallbacks {
  * Senior-level implementation with memory management and performance optimizations
  */
 export function useOptimizedScroll({ onScroll, onScrollStart, onScrollEnd }: ScrollCallbacks = {}) {
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
-  const rafRef = useRef<number>()
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const rafRef = useRef<number | undefined>(undefined)
   const lastScrollYRef = useRef(0)
   const isScrollingRef = useRef(false)
   const lastCallTimeRef = useRef(0)
