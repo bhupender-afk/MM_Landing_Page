@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 export function useScrollPerformance() {
   const [isScrolling, setIsScrolling] = useState(false)
   const [performanceMode, setPerformanceMode] = useState<'auto' | 'high-performance'>('auto')
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const lastScrollTime = useRef(0)
   const frameDropCount = useRef(0)
 
