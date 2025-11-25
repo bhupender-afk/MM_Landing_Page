@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, JSXElementConstructor } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 export interface ShuffleProps {
@@ -149,7 +149,7 @@ const ShuffleText: React.FC<ShuffleProps> = ({
     ...style,
   }
 
-  const Tag = tag as keyof JSX.IntrinsicElements
+  const Tag = tag as keyof React.JSX.IntrinsicElements
 
   if (prefersReducedMotion) {
     return React.createElement(
