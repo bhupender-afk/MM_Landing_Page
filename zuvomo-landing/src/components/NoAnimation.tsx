@@ -33,7 +33,7 @@ export function NoAnimation({
       // For regular components, process their children
       if ((node.props as any)?.children) {
         return React.cloneElement(node, {
-          ...node.props,
+          ...(node.props as any),
           children: processChildren((node.props as any).children)
         })
       }
