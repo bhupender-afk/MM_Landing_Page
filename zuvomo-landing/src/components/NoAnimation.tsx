@@ -27,14 +27,14 @@ export function NoAnimation({
       // If it's a motion component, convert to regular div
       if (typeof node.type === 'string' && node.type.includes('motion')) {
         const { animate, initial, transition, whileHover, whileTap, ...restProps } = node.props as any
-        return React.createElement('div', restProps, processChildren(node.props.children))
+        return React.createElement('div', restProps, processChildren((node.props as any).children))
       }
 
       // For regular components, process their children
-      if (node.props?.children) {
+      if ((node.props as any)?.children) {
         return React.cloneElement(node, {
           ...node.props,
-          children: processChildren(node.props.children)
+          children: processChildren((node.props as any).children)
         })
       }
     }
