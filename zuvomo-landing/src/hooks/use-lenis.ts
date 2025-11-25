@@ -62,7 +62,6 @@ export function useLenis({
       touchMultiplier: 2, // More responsive to touch
       infinite: false,
       syncTouch: false, // Disable for performance
-      touchInertiaMultiplier: 25, // Reduced
       easing: (t) => t, // Linear easing for performance
       orientation: 'vertical',
       gestureOrientation: 'vertical',
