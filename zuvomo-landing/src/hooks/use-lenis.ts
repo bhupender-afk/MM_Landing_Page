@@ -60,7 +60,6 @@ export function useLenis({
       duration: 0.8, // Shorter duration
       wheelMultiplier: 1.2, // More responsive to wheel
       touchMultiplier: 2, // More responsive to touch
-      smoothTouch: false, // Disable for performance
       infinite: false,
       syncTouch: false, // Disable for performance
       touchInertiaMultiplier: 25, // Reduced
