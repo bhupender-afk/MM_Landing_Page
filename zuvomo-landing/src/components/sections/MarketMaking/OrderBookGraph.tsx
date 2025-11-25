@@ -6,7 +6,7 @@ import type { OrderBookGraphProps } from './types'
 
 export function OrderBookGraph({ progress, currentStage, isVisible }: OrderBookGraphProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
   const progressRef = useRef(0)
 
   const generateDataPoints = useCallback((spreadFactor: number) => {
