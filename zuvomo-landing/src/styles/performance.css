@@ -1,0 +1,425 @@
+/* Emergency performance optimizations for smooth scrolling */
+
+/* 1. GPU Acceleration & Hardware Compositing */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+/* EMERGENCY: Disable ALL animations EVERYWHERE */
+*, *::before, *::after {
+  animation: none !important;
+  transition: none !important;
+  /* transform: none !important; */
+  animation-play-state: paused !important;
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
+/* Force all motion components to be static */
+[data-framer-component],
+.motion-div,
+.framer-motion-div {
+  /* animation: none !important; */
+  /* transition: none !important; */
+  /* transform: none !important; */
+}
+
+/* Kill all gradients for performance */
+.bg-gradient-to-r,
+.bg-gradient-to-br,
+.bg-gradient-to-b {
+  background: #f8fafc !important;
+}
+
+/* Remove all blur effects */
+.blur-3xl,
+.blur-2xl,
+.blur-xl,
+.blur-lg {
+  filter: none !important;
+}
+
+/* Kill all shadows */
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  box-shadow: none !important;
+}
+
+/* High performance mode - disable expensive features */
+.high-performance-mode * {
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.high-performance-mode .blur-3xl,
+.high-performance-mode .blur-2xl,
+.high-performance-mode .blur-xl {
+  filter: none !important;
+}
+
+.high-performance-mode .bg-gradient-to-r,
+.high-performance-mode .bg-gradient-to-br,
+.high-performance-mode .bg-gradient-to-b {
+  background: #f3f4f6 !important;
+}
+
+html {
+  /* scroll-behavior: auto !important; Override browser smooth scroll for Lenis */
+  /* scroll-snap-type: y proximity; */
+}
+
+body {
+  /* transform: translateZ(0); Force GPU layer */
+  backface-visibility: hidden;
+  perspective: 1000px;
+  overflow-x: hidden;
+}
+
+/* 2. CSS Containment for Performance */
+section {
+  contain: layout style paint;
+  scroll-snap-align: start;
+}
+
+.container {
+  contain: layout style;
+}
+
+/* 3. Optimize animations and transforms */
+/* .smooth-scroll-optimize {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+} */
+
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 4. Intersection Observer optimizations */
+.lazy-section {
+  contain: layout style paint;
+  content-visibility: auto; /* Modern CSS feature for better performance */
+  contain-intrinsic-size: auto 500px; /* Provide size hints */
+}
+
+/* 5. Image optimizations */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0); /* Force GPU layer */
+}
+
+/* 6. Framer Motion optimizations */
+[data-framer-component] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* 7. Chart and SVG optimizations */
+svg {
+  shape-rendering: optimizeSpeed;
+  contain: layout style paint;
+}
+
+.recharts-wrapper {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* 8. Button and interactive element optimizations */
+button, a, [role="button"] {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition-property: transform, background-color, border-color, opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, a:hover {
+  will-change: transform;
+}
+
+button:not(:hover), a:not(:hover) {
+  will-change: auto;
+}
+
+/* 9. Particle system optimizations */
+.floating-particles {
+  contain: layout style paint;
+  pointer-events: none;
+}
+
+.floating-particles * {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 10. Form optimizations */
+input, textarea, select {
+  will-change: auto;
+  contain: layout style;
+}
+
+input:focus, textarea:focus, select:focus {
+  will-change: border-color, box-shadow;
+}
+
+/* 11. Navigation optimizations */
+nav {
+  contain: layout style paint;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* 12. Reduce layout thrashing */
+.no-layout-shift {
+  contain: layout;
+}
+
+/* 13. Typography optimizations */
+h1, h2, h3, h4, h5, h6 {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+  contain: layout style;
+}
+
+/* 14. Grid and flexbox optimizations */
+.grid, .flex {
+  contain: layout;
+}
+
+/* 15. Responsive image containers */
+.image-container {
+  contain: layout style paint;
+  will-change: auto;
+}
+
+/* 16. Scroll performance */
+.scroll-container {
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+  scroll-behavior: auto;
+  contain: layout style paint;
+}
+
+/* 17. Modal and overlay optimizations */
+.modal, .overlay {
+  contain: layout style paint;
+  will-change: transform, opacity;
+  isolation: isolate;
+}
+
+/* 18. Animation performance classes */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* 19. Loading state optimizations */
+.loading-skeleton {
+  contain: layout style paint;
+  animation-fill-mode: forwards;
+  will-change: background-position;
+}
+
+/* 20. Media query optimizations for performance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    /* animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important; */
+  }
+
+  .floating-particles {
+    display: none;
+  }
+
+  .parallax-element {
+    transform: none !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  * {
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* 21. Print optimizations */
+@media print {
+  .floating-particles,
+  .animated-element,
+  video {
+    display: none !important;
+  }
+
+  * {
+    /* animation: none !important;
+    transition: none !important;
+    transform: none !important; */
+  }
+}
+
+/* 22. Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover-effect {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  button, a {
+    /* Increase touch target size for better UX */
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* 23. High refresh rate display optimizations */
+@media (min-resolution: 120dpi) {
+  .smooth-animation {
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+
+/* 24. Professional Hero Animations for Advisory Firm */
+
+/* Professional floating bubbles */
+@keyframes professional-float {
+  0% {
+    transform: translateY(100vh) translateX(0px) scale(0);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+    transform: translateY(95vh) translateX(0px) scale(1);
+  }
+  25% {
+    transform: translateY(75vh) translateX(10px) scale(1.1);
+  }
+  50% {
+    transform: translateY(50vh) translateX(-5px) scale(0.9);
+  }
+  75% {
+    transform: translateY(25vh) translateX(15px) scale(1.05);
+  }
+  95% {
+    opacity: 1;
+    transform: translateY(5vh) translateX(-10px) scale(0.8);
+  }
+  100% {
+    transform: translateY(-5vh) translateX(0px) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Slow floating for background shapes */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-30px) rotate(0.5deg);
+  }
+}
+
+/* Gradient animation for sophisticated background */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
+/* SVG line drawing animation */
+@keyframes draw-line {
+  0% {
+    stroke-dasharray: 0, 1000;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    stroke-dasharray: 500, 500;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 1000, 0;
+    opacity: 0;
+  }
+}
+
+/* Animation classes */
+.animate-professional-float {
+  animation: professional-float linear infinite;
+  will-change: transform, opacity;
+}
+
+.animate-float-slow {
+  animation: float-slow 15s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 20s ease-in-out infinite;
+  will-change: background-position;
+}
+
+.animate-draw-line {
+  animation: draw-line 12s ease-in-out infinite;
+  will-change: stroke-dasharray, opacity;
+}
+
+/* Performance optimizations for bubbles */
+.professional-bubbles {
+  contain: layout style paint;
+}
+
+.professional-bubbles * {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-up,
+  .animate-pulse-slow {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
