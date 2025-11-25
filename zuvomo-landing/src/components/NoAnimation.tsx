@@ -26,7 +26,7 @@ export function NoAnimation({
     if (React.isValidElement(node)) {
       // If it's a motion component, convert to regular div
       if (typeof node.type === 'string' && node.type.includes('motion')) {
-        const { animate, initial, transition, whileHover, whileTap, ...restProps } = node.props
+        const { animate, initial, transition, whileHover, whileTap, ...restProps } = node.props as any
         return React.createElement('div', restProps, processChildren(node.props.children))
       }
 
