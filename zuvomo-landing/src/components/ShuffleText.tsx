@@ -79,7 +79,7 @@ const ShuffleText: React.FC<ShuffleProps> = ({
   }
 
   // Convert ease string to framer motion compatible easing
-  const getFramerEasing = (easeStr: string) => {
+  const getFramerEasing = (easeStr: string): [number, number, number, number] => {
     switch (easeStr) {
       case 'power3.out':
         return [0.25, 0.46, 0.45, 0.94]
