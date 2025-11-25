@@ -98,7 +98,7 @@ const BackgroundCandlesticks = () => {
 
 export function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#2f3a63]">
+    <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden bg-[#2f3a63]">
       {/* Dark Teal Gradient Background */}
       {/* <div className="absolute inset-0 bg-gradient-to-br from-slate-800 via-teal-900 to-slate-900" /> */}
 
@@ -111,12 +111,12 @@ export function Hero() {
       </div>
 
       {/* Main Content - Split Layout */}
-      <div className="relative z-20 container mx-auto px-6 lg:px-8">
+      <div className="relative z-20 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[60vh] text-center">
 
           {/* Left Side - Main Text Content */}
-          <div className="lg:col-span-12 space-y-8 items-center justify-center flex flex-col">
-            <h1 className="text-5xl lg:text-6xl xl:text-8xl font-bold text-[#2B91D6] leading-tight tracking-tight">
+          <div className="lg:col-span-12 space-y-6 md:space-y-8 items-center justify-center flex flex-col">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold text-[#2B91D6] leading-tight tracking-tight">
               TRUSTED {" "}
               <span className="text-[#f8673c]">
                 CRYPTO
@@ -131,8 +131,8 @@ export function Hero() {
             </h1>
 
             <div className="max-w-2xl text-center items-center justify-center flex flex-col">
-              <div className="h-1 w-16 bg-[#f8673c] mb-6"></div>
-              <p className="text-xl lg:text-2xl text-white leading-relaxed">
+              <div className="h-1 w-16 bg-[#f8673c] mb-4 md:mb-6"></div>
+              <p className="text-lg sm:text-xl lg:text-2xl text-white leading-relaxed">
                 Zuvomo offers ethical market-making services,
                 leveraging advanced algorithmic trading software
                 integrated on 100+ exchanges for global market coverage.
@@ -141,17 +141,17 @@ export function Hero() {
           </div>
 
           {/* Right Side - CTA Buttons */}
-          <div className="lg:col-span-12 relative items-center justify-center flex ">
-            <div className="flex flex-row gap-4 lg:justify-end lg:items-end justify-center items-center">
+          <div className="lg:col-span-12 relative items-center justify-center flex">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto lg:justify-end lg:items-end justify-center items-center">
               <button
-                className="inline-block bg-[#2B91D6] text-white px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-[#2380c0] transition-colors"
+                className="w-full sm:w-auto inline-block bg-[#2B91D6] text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-[#2380c0]"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Get in touch
                 <span className="ml-2">→</span>
               </button>
               <button
-                className="bg-white text-slate-900 px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border border-[#2380c0] hover:bg-[#2B91D6] hover:text-white"
+                className="w-full sm:w-auto bg-white text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl border border-[#2380c0] hover:bg-[#2B91D6] hover:text-white"
                 onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Services
