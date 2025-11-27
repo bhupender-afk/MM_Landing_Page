@@ -121,7 +121,7 @@ export function Hero() {
               <span className="text-[#f8673c]">
                 CRYPTO
               </span>{' '}
-              <span className="text-[#fff]">
+              <span className="text-white">
                 MARKET  {" "}
                 <span className="text-[#f8673c]">
                   MAKERS
